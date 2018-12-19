@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="poke-search">
+    <template>
+        <style>
+            :host{
+                display: block;
+            }
+        
+        </style>
+        <form on-submit="sayHi">
+            <input id="search_data" type="search">
+        </form>
+    </template>
+
+    <script>
+        class PokeSearch extends Polymer.Element{
+            static get is(){ return 'poke-search'}
+            sayHi(event){
+                event.preventDefault()
+                 const search=this.shadowRoot.querySelector('#search_data').value
+                 const customEvent= new CustomEvent('search',{detail:{search}}) 
+                this.dispatchEvent(customEvent)
+            }
+        }
+        window.customElements.define(PokeSearch.is, PokeSearch)
+    </script>
+
+</dom-module>

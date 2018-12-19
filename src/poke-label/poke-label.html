@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="poke-label">
+    <template>
+        <style>
+            :host{
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                left: 0;
+            }
+            .label{
+                color:white;
+                font-size: 1.5rem;
+                text-transform: capitalize;
+                background:rgba(0, 0, 0, 0.5);
+                margin: 0px;
+            }
+        </style>
+        <p class="label">[[name]]</p>
+    </template>
+    <script>
+        class pokeLabel  extends Polymer.Element{
+            static get is() { return 'poke-label'}
+            static get properties(){
+                return {
+                    name:String
+                };
+            }
+        }
+        window.customElements.define(pokeLabel.is, pokeLabel);
+    </script>
+
+</dom-module>

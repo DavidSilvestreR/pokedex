@@ -1,0 +1,66 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../pokedex-card/pokedex-card.html">
+<link rel="import" href="../poke-search/poke-search.html">
+
+<dom-module id="pokedex-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[title]]!</h2>
+    <poke-search on-search="filterPokemon"></poke-search>
+    <pokedex-card name="[[pokemon.name]] [[winBattles]]" url="https://vignette.wikia.nocookie.net/pokemoncyrusonline/images/4/43/Bulbasaur.png/revision/latest?cb=20120105160519"></pokedex-card>
+    <button on-click="change">Cambio</button>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PokedexApp extends Polymer.Element{
+      static get is() { return 'pokedex-app'; }
+      static get properties() {
+        return {
+          title: {
+            type: String,
+            value: 'pokedex-app'
+          },
+          pokemon:{
+            type:Object,
+            readOnly:true,
+            value:()=>({
+              name:'bulbabasor',
+              image:'https://vignette.wikia.nocookie.net/pokemoncyrusonline/images/4/43/Bulbasaur.png/revision/latest?cb=20120105160519',
+              battles:['w','l','w','w'],
+              type:'plant',
+              captured:false
+            })
+          },
+          winBattles:{
+            type:String,
+            computed:"_calculateWins(pokemon)"
+          }
+        };
+      }
+      _calculateWins(pokemos){
+        const battles=pokemos.battles
+        const winBattles=battles.filter((result)=> result==='w')
+        return  winBattles.length + "/" + battles.length
+        
+      }
+      change(){
+        //this.set('pokemon.name','Charmader')
+        console.log(this.winBattles)
+      }
+      filterPokemon(event){
+        console.log(event.detail.search)
+
+      }
+    }
+
+    window.customElements.define(PokedexApp.is, PokedexApp);
+  </script>
+</dom-module>

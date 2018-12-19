@@ -1,0 +1,41 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html" >
+<link rel="import" href="../poke-label/poke-label.html">
+
+<dom-module  id="pokedex-card">
+    <template>
+        <style>
+            :host{
+                display: block;
+                position: relative;
+            }
+            #poke-container{
+                background-color:grey;
+                text-align: center;
+                box-sizing: border-box;
+                padding:0.5rem;
+            }
+            .poke-img{
+                max-width: 50%;
+            }
+            
+        </style>
+        <article id="poke-container">
+            <img class="poke-img" src="[[url]]" alt="[[name]]">
+            <poke-label name="[[name]]"></poke-label>
+        </article>
+        
+
+    </template>
+    <script>
+        class PokedexCard  extends Polymer.Element{
+            static get is() { return 'pokedex-card'}
+            static get properties(){
+                return {
+                    name:String,
+                    url:String,
+                };
+            }
+        }
+        window.customElements.define(PokedexCard.is, PokedexCard);
+    </script>
+</dom-module>
